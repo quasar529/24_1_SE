@@ -1,6 +1,7 @@
 pipeline {
     agent any
 
+	// NAME for directory of test results
 	environment {
         TEST_RESULTS_DIR = "test-results"
     }
@@ -17,6 +18,7 @@ pipeline {
             steps {
                 // Java 파일들을 컴파일하여 생성된 클래스 파일을 classes 디렉토리에 저장
                 sh 'mkdir -p classes'
+                // copy every file in libs and classes in src
                 sh 'javac -encoding UTF-8 -cp "SE_Mission/libs/*" -d classes SE_Mission/src/*.java'
 				
             }
@@ -31,7 +33,6 @@ pipeline {
                     sh "mkdir -p ${TEST_RESULTS_DIR}"
                     sh "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath --classpath=classes > ${TEST_RESULTS_DIR}/test_results.txt"
                     sh "cat ${TEST_RESULTS_DIR}/test_results.txt"
-                    //sh "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath --reports-dir=${TEST_RESULTS_DIR} > test_results.txt"
                 }
             }
         }

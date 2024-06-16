@@ -15,18 +15,21 @@ class BookPerformanceTest {
         book = new Book("0", "Default", "Default", 0);
         book.clearBookCollection();
         largeBookCollection = new ArrayList<>();
+        
+        // Generate Books and Add to collection to search
         for (int i = 1; i <= 100000; i++) {
             largeBookCollection.add(new Book(String.valueOf(i), "Title" + i, "Author" + i, 2000 + (i % 20)));
         }
+        
         for (Book b : largeBookCollection) {
             book.addBook(b);
         }
     }
-
+    
+    // searchBook Performance Measurement
     @Test
     void testSearchPerformance() {
         System.out.println("searchBook Performance Test Start");
-
         long startTime = System.nanoTime();
         String searchResult = book.searchBook("50000");
         String searchResult2 = book.searchBook("75000");
@@ -40,6 +43,7 @@ class BookPerformanceTest {
         System.out.println("searchBook Performance Test Passed");
     }
 
+    // search_bs Performance Measurement
     @Test
     void testBinarySearchPerformance() {
         System.out.println("search_bs Performance Test Start");
