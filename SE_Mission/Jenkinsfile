@@ -29,8 +29,8 @@ pipeline {
                     def classpath = "SE_Mission/libs/junit-platform-console-standalone-1.7.1.jar"
                     // JUnit 5 테스트 실행
                     sh "mkdir -p ${TEST_RESULTS_DIR}"
-                    sh "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath > ${TEST_RESULTS_DIR}/test_results.txt"
-                    sh "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --select-module=BookPerformanceTest > ${TEST_RESULTS_DIR}/performance_test_results.txt" 
+                    sh "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath --classpath=classes > ${TEST_RESULTS_DIR}/test_results.txt"
+                    sh "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --select-module=BookPerformanceTest --classpath=classes > ${TEST_RESULTS_DIR}/performance_test_results.txt" 
                     sh "cat ${TEST_RESULTS_DIR}/performance_test_results.txt"
                     //sh "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath --reports-dir=${TEST_RESULTS_DIR} > test_results.txt"
                 }
