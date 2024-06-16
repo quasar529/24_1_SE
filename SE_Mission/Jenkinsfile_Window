@@ -13,18 +13,18 @@ pipeline {
             steps {
                 // Java 파일들을 컴파일하여 생성된 클래스 파일을 classes 디렉토리에 저장
                 bat 'mkdir -p classes'
-                bat 'javac -encoding UTF-8 -d classes SE_Mission/src/*.java'
+                bat 'javac -encoding UTF-8 -cp "SE_Mission/libs/*" -d classes SE_Mission/src/*.java'
             }
         }
 
         stage('Test') {
             steps {
                 // JUnit 5 테스트 실행을 위한 classpath 설정
-                script {
-                    def classpath = "classes;lib/;path/to/eclipse/plugins/junit-platform-console-standalone-1.7.1.jar"
+                script {             
+                    // def classpath = "classes:lib/*:path/to/eclipse/plugins/junit-platform-console-standalone-1.7.1.jar"
+                    def classpath = "SE_Mission/libs/junit-platform-console-standalone-1.7.1.jar"
                     // JUnit 5 테스트 실행
-                    bat 'java -cp classes;lib/; path/to/eclipse/plugins/junit-platform-console-standalone-1.7.1.jar
-                    org.junit.platform.console.ConsoleLauncher --scan-classpath > test_results.txt'
+                    bat "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath > test_results.txt"
                 }
             }
         }
@@ -42,4 +42,5 @@ pipeline {
             echo 'Build and test succeeded'
         }
     }
-}
+ }
+
