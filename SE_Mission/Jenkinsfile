@@ -26,9 +26,9 @@ pipeline {
             steps {
                 // JUnit 5 테스트 실행을 위한 classpath 설정
                 script {
-                    // def classpath = "classes:lib/*:path/to/eclipse/plugins/junit-platform-console-standalone-1.7.1.jar"
                     def classpath = "SE_Mission/libs/junit-platform-console-standalone-1.7.1.jar"
                     // JUnit 5 테스트 실행
+                    sh "mkdir -p ${TEST_RESULTS_DIR}"
                     sh "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath > {TEST_RESULTS_DIR}/test_results.txt"
                 }
             }
