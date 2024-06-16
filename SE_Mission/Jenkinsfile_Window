@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    // NAME for directory of test results
     environment {
         TEST_RESULTS_DIR = "test-results"
     }
@@ -29,8 +29,7 @@ pipeline {
                     // JUnit 5 테스트 실행
                     bat "mkdir -p ${TEST_RESULTS_DIR}"
                     bat "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath --classpath=classes > ${TEST_RESULTS_DIR}/test_results.txt"
-                    bat "cat ${TEST_RESULTS_DIR}/test_results.txt"
-                    //bat "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath --reports-dir=${TEST_RESULTS_DIR} > test_results.txt"
+                    bat "type ${TEST_RESULTS_DIR}\\test_results.txt"
                 }
             }
         }
