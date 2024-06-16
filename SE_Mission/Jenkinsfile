@@ -38,7 +38,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts "${TEST_RESULTS_DIR}/test_result.txt"
+            archiveArtifacts "test_result.txt"
         }
         failure {
             echo 'Build or test failed'
