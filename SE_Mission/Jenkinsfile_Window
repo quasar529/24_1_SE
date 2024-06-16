@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        TEST_RESULTS_DIR = "test-results"
+    }
+
     stages {
         stage('Checkout') {
             steps {
