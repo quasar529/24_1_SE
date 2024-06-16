@@ -21,10 +21,12 @@ pipeline {
             steps {
                 // JUnit 5 테스트 실행을 위한 classpath 설정
                 script {             
-                    // def classpath = "classes:lib/*:path/to/eclipse/plugins/junit-platform-console-standalone-1.7.1.jar"
                     def classpath = "SE_Mission/libs/junit-platform-console-standalone-1.7.1.jar"
                     // JUnit 5 테스트 실행
-                    bat "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath > test_results.txt"
+                    bat "mkdir -p ${TEST_RESULTS_DIR}"
+                    bat "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath --classpath=classes > ${TEST_RESULTS_DIR}/test_results.txt"
+                    bat "cat ${TEST_RESULTS_DIR}/test_results.txt"
+                    //bat "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath --reports-dir=${TEST_RESULTS_DIR} > test_results.txt"
                 }
             }
         }
@@ -33,7 +35,7 @@ pipeline {
     post {
         always {
             // 테스트 결과 파일을 저장하기 위해 아카이브
-            archiveArtifacts 'test_results.txt'
+            archiveArtifacts "${TEST_RESULTS_DIR}/*"
         }
         failure {
             echo 'Build or test failed'
