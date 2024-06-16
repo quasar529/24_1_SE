@@ -25,7 +25,7 @@ class BookPerformanceTest {
 
     @Test
     void testSearchPerformance() {
-        System.out.println("searchBook 성능 테스트 시작");
+        System.out.println("searchBook Performance Test Start");
 
         long startTime = System.nanoTime();
         String searchResult = book.searchBook("50000");
@@ -33,16 +33,16 @@ class BookPerformanceTest {
         long endTime = System.nanoTime();
 
         long duration = endTime - startTime;
-        System.out.println("searchBook 시간: " + duration + " 나노초");
+        System.out.println("searchBook Duration: " + duration + " nano sec");
 
         assertEquals("검색 결과:\nBook{id: '50000', 제목: 'Title50000', 저자: 'Author50000', 출판년도: 2000}", searchResult);
         assertEquals("검색 결과:\nBook{id: '75000', 제목: 'Title75000', 저자: 'Author75000', 출판년도: 2000}", searchResult2);
-        System.out.println("searchBook 성능 테스트 통과");
+        System.out.println("searchBook Performance Test Passed");
     }
 
     @Test
     void testBinarySearchPerformance() {
-        System.out.println("search_bs 성능 테스트 시작");
+        System.out.println("search_bs Performance Test Start");
 
         long startTime = System.nanoTime();
         String searchResult = book.search_bs("50000");
@@ -50,10 +50,10 @@ class BookPerformanceTest {
         long endTime = System.nanoTime();
 
         long duration = endTime - startTime;
-        System.out.println("search_bs 시간: " + duration + " 나노초");
+        System.out.println("search_bs Duration: " + duration + " nano sec");
 
         assertEquals("검색 결과:\nBook{id: '50000', 제목: 'Title50000', 저자: 'Author50000', 출판년도: 2000}", searchResult);
         assertEquals("검색 결과:\nBook{id: '75000', 제목: 'Title75000', 저자: 'Author75000', 출판년도: 2000}", searchResult2);
-        System.out.println("search_bs 성능 테스트 통과");
+        System.out.println("search_bs Performance Test Passed");
     }
 }
