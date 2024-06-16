@@ -3,7 +3,6 @@ pipeline {
 
 	environment {
         TEST_RESULTS_DIR = "test-results"
-        PERFORMANCE_RESULTS_DIR = "performance-results"
     }
 	
     stages {
@@ -35,25 +34,12 @@ pipeline {
             }
         }
         
-        stage('Performance Test') {
-            steps {
-                // 성능 테스트 실행
-                script {
-                	def classpath = "SE_Mission/libs/junit-platform-console-standalone-1.7.1.jar"
-                    // 성능 테스트 결과 디렉토리 생성
-                    sh "mkdir -p ${PERFORMANCE_RESULTS_DIR}"
-                    // 성능 테스트 실행 및 결과 저장
-                    sh "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --select-class BookPerformanceTest --reports-dir=${PERFORMANCE_RESULTS_DIR} > ${PERFORMANCE_RESULTS_DIR}/performance_test_results.txt"
-                }
-            }
-        }
     }
 
     post {
         always {
             // 테스트 결과 파일을 저장하기 위해 아카이브
             archiveArtifacts "${TEST_RESULTS_DIR}/**/*"
-            archiveArtifacts "${PERFORMANCE_RESULTS_DIR}/**/*"
         }
         failure {
             echo 'Build or test failed'
