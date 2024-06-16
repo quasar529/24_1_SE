@@ -29,12 +29,14 @@ class BookPerformanceTest {
 
         long startTime = System.nanoTime();
         String searchResult = book.searchBook("50000");
+        String searchResult2 = book.searchBook("75000");
         long endTime = System.nanoTime();
 
         long duration = endTime - startTime;
         System.out.println("searchBook 시간: " + duration + " 나노초");
 
         assertEquals("검색 결과:\nBook{id: '50000', 제목: 'Title50000', 저자: 'Author50000', 출판년도: 2000}", searchResult);
+        assertEquals("검색 결과:\nBook{id: '75000', 제목: 'Title75000', 저자: 'Author75000', 출판년도: 2000}", searchResult2);
         System.out.println("searchBook 성능 테스트 통과");
     }
 
@@ -44,12 +46,14 @@ class BookPerformanceTest {
 
         long startTime = System.nanoTime();
         String searchResult = book.search_bs("50000");
+        String searchResult2 = book.search_bs("75000");
         long endTime = System.nanoTime();
 
         long duration = endTime - startTime;
         System.out.println("search_bs 시간: " + duration + " 나노초");
 
         assertEquals("검색 결과:\nBook{id: '50000', 제목: 'Title50000', 저자: 'Author50000', 출판년도: 2000}", searchResult);
+        assertEquals("검색 결과:\nBook{id: '75000', 제목: 'Title75000', 저자: 'Author75000', 출판년도: 2000}", searchResult2);
         System.out.println("search_bs 성능 테스트 통과");
     }
 }
